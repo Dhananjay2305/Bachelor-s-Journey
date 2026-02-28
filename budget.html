@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget — BachelorHub 📊</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <style>
+        .budget-history-container {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--bg-glass);
+            border-radius: var(--radius-md);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .history-item:hover {
+            background: var(--bg-glass-hover);
+            border-color: var(--accent-blue);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">🏠</span>
+            <span class="nav-logo-text">BachelorHub</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="recipes.html">🍳 Recipes</a></li>
+            <li><a href="budget.html">📊 Budget</a></li>
+            <li><a href="shop.html">🛒 Shop</a></li>
+            <li><a href="auth.html" id="nav-auth-link">👤 Login</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+            <a href="shop.html" class="nav-cart-btn" style="text-decoration:none">
+                🛒 <span class="cart-count" id="cartCount">0</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="section-badge badge-blue">📊 Planning</span>
+            <h2 class="section-title">Room Budget Manager</h2>
+            <p class="section-subtitle">Persistence enabled. Your budget plans are saved to MongoDB for future
+                reference.</p>
+        </div>
+
+        <div class="budget-container">
+            <div class="budget-input-panel">
+                <div class="budget-input-group">
+                    <label>💵 Monthly Budget</label>
+                    <div class="budget-input-wrapper">
+                        <span class="currency">₹</span>
+                        <input type="number" class="budget-input" id="budgetInput" value="10000">
+                    </div>
+                    <div class="budget-presets">
+                        <button class="preset-btn" data-value="8000">₹8k</button>
+                        <button class="preset-btn" data-value="10000">₹10k</button>
+                        <button class="preset-btn" data-value="15000">₹15k</button>
+                    </div>
+                </div>
+
+                <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--text-secondary);">🔧 Custom Split</h3>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>🏠 Rent</span> <span id="value-rent">40%</span></div>
+                    <input type="range" class="budget-slider" id="slider-rent" min="10" max="60" value="40">
+                </div>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>🍽️ Food</span> <span id="value-food">25%</span></div>
+                    <input type="range" class="budget-slider" id="slider-food" min="10" max="50" value="25">
+                </div>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>💡 Utilities</span> <span id="value-utilities">10%</span>
+                    </div>
+                    <input type="range" class="budget-slider" id="slider-utilities" min="2" max="25" value="10">
+                </div>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>🧹 Cleaning</span> <span id="value-cleaning">5%</span></div>
+                    <input type="range" class="budget-slider" id="slider-cleaning" min="2" max="15" value="5">
+                </div>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>🚌 Transport</span> <span id="value-transport">10%</span>
+                    </div>
+                    <input type="range" class="budget-slider" id="slider-transport" min="2" max="25" value="10">
+                </div>
+                <div class="budget-slider-group">
+                    <div class="budget-slider-header"><span>💰 Savings</span> <span id="value-savings">10%</span></div>
+                    <input type="range" class="budget-slider" id="slider-savings" min="0" max="30" value="10">
+                </div>
+
+                <button class="budget-calculate-btn" onclick="saveBudget()">💾 Save Budget Plan</button>
+
+                <div class="budget-history-container" id="expenseSection"
+                    style="display:none; border-top: 2px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-color);">💸 Track Expenses</h3>
+                    <div class="budget-input-group">
+                        <label>Title</label>
+                        <input type="text" id="expense-title" class="budget-input" placeholder="e.g. Groceries"
+                            style="width: 100%; margin-bottom: 10px; font-size: 1rem;">
+
+                        <label>Amount (₹)</label>
+                        <input type="number" id="expense-amount" class="budget-input" placeholder="Amount"
+                            style="width: 100%; margin-bottom: 10px; font-size: 1rem;">
+
+                        <label>Category</label>
+                        <select id="expense-category" class="budget-input"
+                            style="width: 100%; margin-bottom: 15px; font-size: 1rem; background: var(--bg-color); color: var(--text-color);">
+                            <option value="rent">🏠 Rent</option>
+                            <option value="food">🍽️ Food</option>
+                            <option value="utilities">💡 Utilities</option>
+                            <option value="cleaning">🧹 Cleaning</option>
+                            <option value="transport">🚌 Transport</option>
+                            <option value="savings">💰 Savings</option>
+                        </select>
+
+                        <button class="budget-calculate-btn" onclick="saveExpense()"
+                            style="background: var(--accent-green); margin-bottom: 20px;">➕ Add Expense</button>
+                    </div>
+                </div>
+
+                <div class="budget-history-container">
+                    <h4 style="margin-bottom:1rem; font-size:0.9rem; color:var(--text-secondary)">Recent Plans</h4>
+                    <div id="budgetHistory"></div>
+                </div>
+            </div>
+
+            <div class="budget-result-panel">
+                <div class="budget-chart-container"
+                    style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                    <canvas id="budgetChart"></canvas>
+                    <canvas id="monthlyChart" style="display: none; max-width: 280px; max-height: 280px;"></canvas>
+                </div>
+                <div id="remainingBudgetDisplay"
+                    style="display:none; text-align:center; font-size:1.2rem; font-weight:bold; margin-top:20px; color:var(--text-color);">
+                </div>
+                <ul class="budget-breakdown" id="budgetBreakdown"></ul>
+                <div class="budget-tip" id="budgetTip"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="tips">
+        <div class="section-header">
+            <span class="section-badge badge-purple">💡 Knowledge</span>
+            <h2 class="section-title">Survival Tips</h2>
+        </div>
+        <div class="tips-grid" id="tipsGrid"></div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/budget.js"></script>
+</body>
+
+</html>

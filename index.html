@@ -1,0 +1,102 @@
+ssss
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Bachelor Life Hub — Your ultimate survival guide! Cook delicious meals, manage budget, and shop groceries.">
+    <title>BachelorHub — Cook. Budget. Shop. 🏠</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+</head>
+
+<body>
+
+    <!-- ======== NAVBAR ======== -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">🏠</span>
+            <span class="nav-logo-text">BachelorHub</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="recipes.html">🍳 Recipes</a></li>
+            <li><a href="budget.html">📊 Budget</a></li>
+            <li><a href="shop.html">🛒 Shop</a></li>
+            <li><a href="auth.html" id="nav-auth-link">👤 Login</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+            <a href="shop.html" class="nav-cart-btn" style="text-decoration:none">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+
+    <!-- ======== HERO ======== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-emoji">🍳🏠🛒</div>
+            <h1>
+                Your Ultimate<br>
+                <span class="gradient-text">Bachelor Survival Guide</span>
+            </h1>
+            <p class="hero-subtitle">
+                Master the art of living alone. From quick recipes and smart budgeting to
+                fresh groceries delivered to your door — we handle the chores, you handle the fun.
+            </p>
+            <div class="hero-actions">
+                <a href="recipes.html" class="btn btn-primary">🍽️ Explore Recipes</a>
+                <a href="budget.html" class="btn btn-secondary">📊 Plan My Budget</a>
+                <a href="shop.html" class="btn btn-secondary">🛒 Start Shopping</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">12+</div>
+                    <div class="hero-stat-label">Fast Recipes</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">24+</div>
+                    <div class="hero-stat-label">Grocery Items</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">Smart</div>
+                    <div class="hero-stat-label">Budget Pro</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======== FEATURES ======== -->
+    <div class="features-bar">
+        <div class="feature-card">
+            <div class="feature-icon">🍳</div>
+            <h3>Easy Recipes</h3>
+            <p>Quick meals designed for small kitchens and busy schedules.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Budget Manager</h3>
+            <p>Intelligent tracking for rent, food, and savings.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🛒</div>
+            <h3>Grocery Shop</h3>
+            <p>Fresh vegetables and essentials delivered in minutes.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            © 2026 BachelorHub. Built for the modern bachelor.
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+</body>
+
+</html>

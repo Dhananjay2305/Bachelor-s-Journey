@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes — BachelorHub 🍳</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <span class="nav-logo-icon">🏠</span>
+            <span class="nav-logo-text">BachelorHub</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="recipes.html">🍳 Recipes</a></li>
+            <li><a href="budget.html">📊 Budget</a></li>
+            <li><a href="shop.html">🛒 Shop</a></li>
+            <li><a href="auth.html" id="nav-auth-link">👤 Login</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+            <a href="shop.html" class="nav-cart-btn" style="text-decoration:none">
+                🛒 <span class="cart-count" id="cartCount">0</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="section-badge badge-orange">🍽️ Collection</span>
+            <h2 class="section-title">Bachelor-Friendly Recipes</h2>
+            <p class="section-subtitle">No multi-step complex instructions. Just 15-minute meals that taste like home.
+            </p>
+        </div>
+
+        <div class="recipe-categories">
+            <button class="category-btn active" onclick="filterRecipes('all', this)">🍽️ All</button>
+            <button class="category-btn" onclick="filterRecipes('breakfast', this)">🌅 Breakfast</button>
+            <button class="category-btn" onclick="filterRecipes('lunch', this)">☀️ Lunch</button>
+            <button class="category-btn" onclick="filterRecipes('dinner', this)">🌙 Dinner</button>
+            <button class="category-btn" onclick="filterRecipes('snacks', this)">🍿 Snacks</button>
+            <button class="category-btn" onclick="filterRecipes('favorites', this)">❤️ Favorites</button>
+        </div>
+
+        <div class="recipe-advanced-filters"
+            style="display: flex; gap: 15px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap;">
+            <select id="filter-time" onchange="applyFilters()"
+                style="padding: 10px; border-radius: 6px; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                <option value="all">⏱️ Any Time</option>
+                <option value="15">&lt; 15 mins</option>
+                <option value="30">15-30 mins</option>
+                <option value="60">&gt; 30 mins</option>
+            </select>
+
+            <select id="filter-difficulty" onchange="applyFilters()"
+                style="padding: 10px; border-radius: 6px; background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                <option value="all">👨‍🍳 Any Difficulty</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <label
+                style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-color); background: var(--card-bg); padding: 5px 15px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <input type="checkbox" id="filter-veg" onchange="applyFilters()"> 🥬 Veg Only
+            </label>
+        </div>
+
+        <div class="recipe-grid" id="recipeGrid">
+            <p style="text-align:center; color:var(--text-muted); grid-column:1/-1;">Fetching recipes from server...</p>
+        </div>
+    </section>
+
+    <div class="recipe-modal-overlay" id="recipeModal"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/recipes.js"></script>
+</body>
+
+</html>
